@@ -1,0 +1,21 @@
+service: websocket-notifications
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-south-1
+functions:
+  connect:
+    handler: src/connect.handler
+    events:
+      - websocket:
+          route: $connect
+  disconnect:
+    handler: src/disconnect.handler
+    events:
+      - websocket:
+          route: $disconnect
+  sendMessage:
+    handler: src/sendMessage.handler
+    events:
+      - websocket:
+          route: sendMessage
